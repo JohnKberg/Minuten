@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using Minuten;
 using Minuten.Models;
 using Minuten.Dtos;
+using AutoMapper;
 
 namespace Minuten.Controllers
 {
@@ -34,7 +35,7 @@ namespace Minuten.Controllers
                 return NotFound();
             }
 
-            return Ok(episode);
+            return Ok(Mapper.Map<Episode, EpisodeDto>(episode));
         }
 
         // PUT: api/Episodes/5

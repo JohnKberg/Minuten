@@ -13,6 +13,7 @@ namespace Minuten
     {
         protected void Application_Start()
         {
+            AutoMapper.Mapper.Initialize(c => c.AddProfile<MappingProfile>());
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
