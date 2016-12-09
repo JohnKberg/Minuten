@@ -22,7 +22,7 @@ namespace Minuten
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/Minuten/supernice.css",
                       "~/Content/site.css"));
         }
     }

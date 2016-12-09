@@ -22,7 +22,7 @@ namespace Minuten.Controllers
         // GET: api/Episodes
         public IQueryable<Episode> GetEpisodes()
         {
-            return db.Episodes;
+            return db.Episodes.OrderBy(e => e.Date);
         }
 
         // GET: api/Episodes/5
