@@ -10,6 +10,7 @@ namespace Minuten
         {
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                         "~/Scripts/angular.js",
+                        "~/scripts/angular-resource.js",
                         "~/Scripts/jquery-{version}.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -22,7 +23,7 @@ namespace Minuten
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/Minuten/supernice.css",
+                      "~/Content/bootstrap.css",
                       "~/Content/site.css"));
         }
     }

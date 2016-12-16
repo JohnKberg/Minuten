@@ -40,19 +40,24 @@ namespace Minuten.Controllers
 
         // PUT: api/Episodes/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutEpisode(int id, EpisodeDto episode)
+        public IHttpActionResult PutEpisode(int id, EpisodeDto episodeDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != episode.Id)
+            if (id != episodeDto.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(episode).State = EntityState.Modified;
+            var episode = db.Episodes.SingleOrDefault(e => e.Id == id);
+
+            if (episode == null)
+                return NotFound();
+
+            Mapper.Map(episodeDto, episode);
 
             try
             {

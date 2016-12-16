@@ -1,14 +1,36 @@
-﻿<div ng-app="MinutenApp">
+﻿<div ng-app="MinutenApp" ng-controller="MinutenController">
     <h1>{{"HEj" + " ...hopp!"}}</h1>
-    <div ng-controller="MinutenController as MinutenCtrl" ng-init="listEpisodes()">
-        <ul class="list-group">
-            <li class="list-group-item" ng-repeat="episode in episodes"><span class="badge">{{episode.date}}</span>{{episode.title}}</li>
-        </ul>
-        
-        <div class="well">{{episodes.length}}</div>
+   
+    <div class="form-group">
+        <label for="searchEpisode">Sök avsnitt: </label>
+        <input type="text" class="form-control" id="searchEpisode" placeholder="Sök" ng-model="searchText">
+    </div>
+    <div class="form-group">
+        <label for="sortSelect">Sortera: </label>
+        <select id="sortSelect" class="form-control" ng-model="sortColumn">
+            <option value="date">Äldsta först</option>
+            <option value="-date">Senaste först</option>
+        </select>
+    </div>
+    
+    <div id="eplist">
+
+        <div ng-repeat="episode in episodes | orderBy:sortColumn | filter:searchText">
+            <a href="#" data-toggle="collapse" data-target="#{{episode.id}}" data-parent="#eplist" class="list-group-item">
+                {{episode.title}}
+            </a>
+            <div id="{{episode.id}}" class="sublinks collapse">
+                {{episode.date | date:"yyyy-MM-dd"}}
+                <br />
+                {{episode.description}}
+                <input type="text" class="form-control" ng-model="episode.altTitle" />
+                <button type="button" class="btn btn-primary" ng-click="updateEpisode(episode)">Spara</button>
+            </div>
+
+        </div>
     </div>
 </div>
 @section Scripts
 {
-<script src="~/Scripts/minuten-app.js"></script>    
+    <script src="~/Scripts/app/app.js"></script>
 }
