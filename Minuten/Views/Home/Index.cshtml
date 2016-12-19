@@ -1,6 +1,6 @@
 ﻿<div ng-app="MinutenApp" ng-controller="MinutenController">
     <h1>{{"HEj" + " ...hopp!"}}</h1>
-   
+
     <div class="form-group">
         <label for="searchEpisode">Sök avsnitt: </label>
         <input type="text" class="form-control" id="searchEpisode" placeholder="Sök" ng-model="searchText">
@@ -12,7 +12,7 @@
             <option value="-date">Senaste först</option>
         </select>
     </div>
-    
+
     <div id="eplist">
 
         <div ng-repeat="episode in episodes | orderBy:sortColumn | filter:searchText">
@@ -23,7 +23,17 @@
                 {{episode.date | date:"yyyy-MM-dd"}}
                 <br />
                 {{episode.description}}
-                <input type="text" class="form-control" ng-model="episode.altTitle" />
+                <label for="altTitle">Alt. Titel</label>
+                <input id="altTitle" type="text" class="form-control" ng-model="episode.altTitle" />
+                <label for="originalDate">Originaldatum</label>
+                <input id="originalDate" type="text" class="form-control" ng-model="episode.originalDate" />
+                <label for="winnersPrize">Vinnarpris</label>
+                <input id="winnersPrize" type="text" class="form-control" ng-model="episode.winnersPrize" />
+                <label for="myComment">Kommentar</label>
+                <input id="myComment" type="text" class="form-control" ng-model="episode.myComment" />
+                <label for="myRating">Mitt betyg</label>
+                <input id="myRating" type="number" class="form-control" ng-model="episode.myRating" />
+
                 <button type="button" class="btn btn-primary" ng-click="updateEpisode(episode)">Spara</button>
             </div>
 
