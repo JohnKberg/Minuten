@@ -1,6 +1,5 @@
 ﻿<div ng-app="MinutenApp" ng-controller="MinutenController">
-    <h1>{{"HEj" + " ...hopp!"}}</h1>
-
+    <h1>På Minuten - Avsnitt</h1>
     <div class="form-group">
         <label for="searchEpisode">Sök avsnitt: </label>
         <input type="text" class="form-control" id="searchEpisode" placeholder="Sök" ng-model="searchText">
@@ -12,33 +11,52 @@
             <option value="-date">Senaste först</option>
         </select>
     </div>
-
-    <div id="eplist">
-
-        <div ng-repeat="episode in episodes | orderBy:sortColumn | filter:searchText">
-            <a href="#" data-toggle="collapse" data-target="#{{episode.id}}" data-parent="#eplist" class="list-group-item">
-                {{episode.title}}
-            </a>
-            <div id="{{episode.id}}" class="sublinks collapse">
-                {{episode.date | date:"yyyy-MM-dd"}}
-                <br />
-                {{episode.description}}
-                <label for="altTitle">Alt. Titel</label>
-                <input id="altTitle" type="text" class="form-control" ng-model="episode.altTitle" />
-                <label for="originalDate">Originaldatum</label>
-                <input id="originalDate" type="text" class="form-control" ng-model="episode.originalDate" />
-                <label for="winnersPrize">Vinnarpris</label>
-                <input id="winnersPrize" type="text" class="form-control" ng-model="episode.winnersPrize" />
-                <label for="myComment">Kommentar</label>
-                <input id="myComment" type="text" class="form-control" ng-model="episode.myComment" />
-                <label for="myRating">Mitt betyg</label>
-                <input id="myRating" type="number" class="form-control" ng-model="episode.myRating" />
-
+    <hr />
+    <uib-accordion close-others="true">
+        <div uib-accordion-group class="panel-default" heading="{{episode.title}}" ng-repeat="episode in episodes | orderBy:sortColumn | filter:searchText">
+            <strong>{{episode.date | date:"yyyy-MM-dd"}}</strong>
+            <br />
+            <p>{{episode.description}}</p>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="altTitle{{episode.id}}">Alt. Titel</label>
+                        <input id="altTitle{{episode.id}}" type="text" class="form-control" ng-model="episode.altTitle" />
+                    </div>
+                    <div class="form-group">
+                        <label for="originalDate{{episode.id}}">Originaldatum</label>
+                        <input id="originalDate{{episode.id}}" type="text" class="form-control" ng-model="episode.originalDate" />
+                    </div>
+                    <div class="form-group">
+                        <label for="winnersPrize{{episode.id}}">Vinnarpris</label>
+                        <input id="winnersPrize{{episode.id}}" type="text" class="form-control" ng-model="episode.winnersPrize" />
+                    </div>
+                    <div class="form-group">
+                        <label for="myComment{{episode.id}}">Kommentar</label>
+                        <textarea id="myComment{{episode.id}}" name="myComment{{episode.id}}" cols="20" rows="20" class="form-control" ng-model="episode.myComment"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="myRating{{episode.id}}">Mitt betyg</label>
+                        <div id="myRating{{episode.id}}" uib-rating ng-model="episode.myRating" max="5" aria-labelledby="default-rating"></div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6">
+                    <label for="panelMembers{{episode.id}}">Panelmedlemmar:</label>
+                    <div id="panelMembers{{episode.id}}" class="form-group">
+                        <select ng-options="" class="form-control" ng-model="episode.panelMembers" multiple>
+                            option ng-repeat="p in pmembers" ng-value="{{p.id}}">{{p.name}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
                 <button type="button" class="btn btn-primary" ng-click="updateEpisode(episode)">Spara</button>
             </div>
 
         </div>
-    </div>
+    </uib-accordion>
 </div>
 @section Scripts
 {

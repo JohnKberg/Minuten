@@ -11,6 +11,7 @@ namespace Minuten
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                         "~/Scripts/angular.js",
                         "~/scripts/angular-resource.js",
+                        "~/scripts/angular-ui/ui-bootstrap-tpls.js",
                         "~/Scripts/jquery-{version}.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

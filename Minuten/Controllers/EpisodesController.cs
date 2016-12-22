@@ -20,9 +20,11 @@ namespace Minuten.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Episodes
-        public IQueryable<Episode> GetEpisodes()
+        public IHttpActionResult GetEpisodes()
         {
-            return db.Episodes.OrderBy(e => e.Date);
+            var episodes = db.Episodes.Include(e => e.PanelMembers).OrderBy(e => e.Date);
+            var epDtos = episodes.ToList().Select(Mapper.Map<Episode, EpisodeDto>);
+            return Ok(epDtos);
         }
 
         // GET: api/Episodes/5

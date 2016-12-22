@@ -1,0 +1,29 @@
+﻿ <div id="eplist">
+
+        
+
+            <div ng-repeat="episode in episodes | orderBy:sortColumn | filter:searchText">
+                <a href="#" data-toggle="collapse" data-target="#{{episode.id}}" data-parent="#eplist" class="list-group-item">
+                    {{episode.title}}
+                </a>
+                <div id="{{episode.id}}" class="sublinks">
+                    {{episode.date | date:"yyyy-MM-dd"}}
+                    <br />
+                    {{episode.description}}
+                    <label for="altTitle">Alt. Titel</label>
+                    <input id="altTitle" type="text" class="form-control" ng-model="episode.altTitle" />
+                    <label for="originalDate">Originaldatum</label>
+                    <input id="originalDate" type="text" class="form-control" ng-model="episode.originalDate" />
+                    <label for="winnersPrize">Vinnarpris</label>
+                    <input id="winnersPrize" type="text" class="form-control" ng-model="episode.winnersPrize" />
+                    <label for="myComment">Kommentar</label>
+                    <input id="myComment" type="text" class="form-control" ng-model="episode.myComment" />
+                    <label for="myRating">Mitt betyg</label>
+
+                    <span id="myRating" uib-rating ng-model="episode.myRating" max="5" aria-labelledby="default-rating"></span>
+
+                    <button type="button" class="btn btn-primary" ng-click="updateEpisode(episode)">Spara</button>
+                </div>
+
+            </div>
+</div>

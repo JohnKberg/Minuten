@@ -1,11 +1,12 @@
 ﻿
-var app = angular.module("MinutenApp", ['ngResource']);
+var app = angular.module("MinutenApp", ['ngResource', 'ui.bootstrap']);
 //
-app.controller("MinutenController", function ($scope, $log, EpisodeService) {
+app.controller("MinutenController", function ($scope, $log, EpisodeService, PanelMemberService) {
 
     $scope.sortColumn = "date";
     $scope.episodes = [];
     $scope.episodes = EpisodeService.query();
+    $scope.pmembers = PanelMemberService.query();
 
     $log.info($scope.episodes); // LOG
     
@@ -27,6 +28,15 @@ app.factory("EpisodeService", function ($resource) {
     return $resource("/api/episodes/:id", { id: "@id" }, {
         update: {
             method:'PUT'
+        }
+    });
+});
+
+
+app.factory("PanelMemberService", function ($resource) {
+    return $resource("/api/panelmembers/:id", { id: "@id" }, {
+        update: {
+            method: 'PUT'
         }
     });
 });
